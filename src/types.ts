@@ -8,7 +8,7 @@ export interface BusinessExceptionResponse {
 
 /** @description 未捕获的异常响应体 */
 export interface UncaughtExceptionResponse {
-  code: HttpStatus.INTERNAL_SERVER_ERROR
+  code: number
 
   /** @default string unknown error */
   message: string

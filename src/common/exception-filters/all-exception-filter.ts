@@ -1,4 +1,4 @@
-import type { ArgumentsHost, ExceptionFilter } from '@nestjs/common'
+import { ArgumentsHost, ExceptionFilter, HttpException } from '@nestjs/common'
 import type { Response } from 'express'
 import type { UncaughtExceptionResponse } from 'src/types'
 
@@ -10,8 +10,13 @@ class AllExceptionFilter implements ExceptionFilter<unknown> {
     const ctx = host.switchToHttp()
     const resp = ctx.getResponse<Response>()
 
+    let code = HttpStatus.INTERNAL_SERVER_ERROR
     let message = 'unknown error'
     let stack = undefined
+
+    if (exception instanceof HttpException) {
+      code = exception.getStatus()
+    }
 
     if (exception instanceof Error) {
       message = exception.message
@@ -21,8 +26,8 @@ class AllExceptionFilter implements ExceptionFilter<unknown> {
       }
     }
 
-    resp.status(HttpStatus.INTERNAL_SERVER_ERROR).json({
-      code: HttpStatus.INTERNAL_SERVER_ERROR,
+    resp.status(code).json({
+      code,
       message,
       stack,
     } as UncaughtExceptionResponse)
