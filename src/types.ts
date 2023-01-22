@@ -1,4 +1,9 @@
-import { HttpStatus } from '@nestjs/common'
+/** @description 业务统一响应体 */
+export interface BusinessResponse<T = any> {
+  code: number
+  message: string
+  data: T
+}
 
 /** @description 业务统一异常响应体 */
 export interface BusinessExceptionResponse {
