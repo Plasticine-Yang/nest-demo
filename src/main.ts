@@ -1,3 +1,4 @@
+import { ValidationPipe } from '@nestjs/common'
 import { NestFactory } from '@nestjs/core'
 import { Logger } from 'nestjs-pino'
 
@@ -28,6 +29,9 @@ async function bootstrap() {
     // 业务统一响应体
     new BusinessResponseInterceptor(),
   )
+
+  // 全局字段校验
+  app.useGlobalPipes(new ValidationPipe())
 
   await app.listen(3000)
 }
