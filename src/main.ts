@@ -1,4 +1,5 @@
 import { NestFactory } from '@nestjs/core'
+import { Logger } from 'nestjs-pino'
 
 import { AppModule } from './app.module'
 
@@ -11,6 +12,9 @@ import { BusinessResponseInterceptor } from './common/interceptors'
 async function bootstrap() {
   const app = await NestFactory.create(AppModule)
 
+  // 日志
+  app.useLogger(app.get(Logger))
+
   // 异常处理
   app.useGlobalFilters(
     // 处理未捕获的异常
@@ -20,7 +24,10 @@ async function bootstrap() {
     new BusinessHttpExceptionFilter(),
   )
 
-  app.useGlobalInterceptors(new BusinessResponseInterceptor())
+  app.useGlobalInterceptors(
+    // 业务统一响应体
+    new BusinessResponseInterceptor(),
+  )
 
   await app.listen(3000)
 }
