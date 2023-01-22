@@ -15,6 +15,6 @@ async function bootstrap() {
     new BusinessHttpExceptionFilter(),
   )
 
-  await app.listen(28378)
+  await app.listen(6666)
 }
 bootstrap()
