@@ -5,7 +5,7 @@ import type { UncaughtExceptionResponse } from 'src/types'
 import { HttpStatus } from '@nestjs/common'
 import ErrorStackParser from 'error-stack-parser'
 
-class AllExceptionFilter implements ExceptionFilter<unknown> {
+class UncaughtExceptionFilter implements ExceptionFilter<unknown> {
   catch(exception: unknown, host: ArgumentsHost) {
     const ctx = host.switchToHttp()
     const resp = ctx.getResponse<Response>()
@@ -34,4 +34,4 @@ class AllExceptionFilter implements ExceptionFilter<unknown> {
   }
 }
 
-export { AllExceptionFilter }
+export { UncaughtExceptionFilter }
