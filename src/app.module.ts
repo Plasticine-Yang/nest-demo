@@ -6,7 +6,10 @@ import { configModuleOptions } from './common/use-yaml-config'
 
 @Module({
   imports: [
+    // 加载 yaml 格式的配置文件
     ConfigModule.forRoot(configModuleOptions),
+
+    // 日志
     LoggerModule.forRoot({
       pinoHttp: {
         transport: {
