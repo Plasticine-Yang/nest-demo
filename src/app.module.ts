@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common'
 import { ConfigModule } from '@nestjs/config'
 import { LoggerModule } from 'nestjs-pino'
+import { DatabaseModule } from './common/database'
 
 import { configModuleOptions } from './common/use-yaml-config'
 
@@ -17,6 +18,9 @@ import { configModuleOptions } from './common/use-yaml-config'
         },
       },
     }),
+
+    // 数据库
+    DatabaseModule.forRoot({ type: 'mysql' }),
   ],
 })
 export class AppModule {}
