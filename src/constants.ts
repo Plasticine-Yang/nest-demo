@@ -6,4 +6,7 @@ export class API_CODE {
 
   @ApiCodeDescription('实体不存在')
   static ENTITY_NOT_EXIST = 1000
+
+  @ApiCodeDescription('实体已存在')
+  static ENTITY_DUPLICATED = 1001
 }
